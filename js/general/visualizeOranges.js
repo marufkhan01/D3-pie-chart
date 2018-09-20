@@ -14,7 +14,7 @@ function visualizeOranges ()
         .attr("fill", "orange")
         .attr("cx", function (d,i)
         {
-            return d + (i * 100);
+            return d + (i * 150);
         })
         .attr("cy", function (d)
         {

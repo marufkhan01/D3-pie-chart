@@ -2,14 +2,14 @@ function svgExample()
 {
    var canvas = d3.select("body")
        .append("svg")
-       .attr("width", 700)
-       .attr("height", 700);
+       .attr("width", 800)
+       .attr("height", 800);
 
     var circle = canvas.append("circle")
-        .attr("cx", 10)
-        .attr("cy", 10)
-        .attr("r", 10)
-        .attr("fill", "blue");
+        .attr("cx", 50)
+        .attr("cy", 50)
+        .attr("r", 50)
+        .attr("fill", "red");
 
     var rectangle = canvas.append("rect")
         .attr("width", 100)
@@ -20,7 +20,7 @@ function svgExample()
         .attr("x2", 200)
         .attr("y1", 100)
         .attr("y2", 300)
-        .attr("stroke", "grey")
-        .attr("stroke-width", 3);
+        .attr("stroke", "yellow")
+        .attr("stroke-width", 4);
 
 }

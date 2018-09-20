@@ -115,7 +115,7 @@ function donutChart ()
             .attr("dy", "0.15em")
             .text(function (d)
             {
-                return d.data.rank;
+                return d.data.name;
             });
     });
 }
@@ -227,7 +227,9 @@ function paths ()
 
 
 }
-function scaling ()
+
+function scaling()
+
 {
     var graphData   = [10, 1200],
         w           = 500,
@@ -256,32 +258,45 @@ function scaling ()
         {
             return i * 50;
         })
+
+
 }
 function svgExample()
 {
    var canvas = d3.select("body")
        .append("svg")
-       .attr("width", 700)
-       .attr("height", 700);
+       .attr("width", 800)
+       .attr("height", 800);
 
     var circle = canvas.append("circle")
-        .attr("cx", 10)
-        .attr("cy", 10)
+        .attr("cx", 30)
+        .attr("cy", 0)
         .attr("r", 10)
+        .attr("fill", "pink");
+
+    var circle = canvas.append("circle")
+        .attr("cx", 80)
+        .attr("cy", 40)
+        .attr("r", 30)
+        .attr("fill", "yellow");
+
+    var circle = canvas.append("circle")
+        .attr("cx", 150)
+        .attr("cy", 110)
+        .attr("r", 50)
         .attr("fill", "blue");
 
-    var rectangle = canvas.append("rect")
-        .attr("width", 100)
-        .attr("height", 100);
+    var circle = canvas.append("circle")
+        .attr("cx", 260)
+        .attr("cy", 230)
+        .attr("r", 100)
+        .attr("fill", "red");
 
-    var line = canvas.append("line")
-        .attr("x1", 0)
-        .attr("x2", 200)
-        .attr("y1", 100)
-        .attr("y2", 300)
-        .attr("stroke", "grey")
-        .attr("stroke-width", 3);
-
+    var circle = canvas.append("circle")
+        .attr("cx", 500)
+        .attr("cy", 450)
+        .attr("r", 150)
+        .attr("fill", "green");
 }
 function transitions ()
 {
@@ -352,6 +367,59 @@ function visualizeOranges ()
         .attr("r", function (d)
         {
             return d;
+        });
+
+}
+
+function piechart(){
+
+    d3.json("data/pie_Chart.json", function (data)
+        {
+            var radius      = 200;
+            var color       = d3.scale.ordinal()
+                .range(["#1abc9c", "#2ecc71", "#27ae60", "#16a085", "#3498db", "#2980b9", "#f1c40f","#e67e22","#d35400","#f39c12","#e74c3c","#c0392b"]);
+
+            var canvas      = d3.select(".pieChart")
+                .append("svg")
+                .attr("width", 1000)
+                .attr("height", 1000);
+
+            var group       = canvas.append("g")
+                .attr("transform", "translate(500,350)");
+
+            var arc         = d3.svg.arc()
+                .innerRadius(40)
+                .outerRadius(radius);
+
+            var pie         = d3.layout.pie()
+                .value(function (d)
+                {
+                    return d.rank;
+                });
+
+            var theArc      = group.selectAll(".arc")
+                .data(pie(data))
+                .enter()
+                .append("g")
+                .attr("class", "arc");
+
+            theArc.append("path")
+                .attr("d", arc)
+                .attr("fill", function (d)
+                {
+                    return color(d.data.rank);
+                });
+
+            theArc.append("text")
+                .attr("transform", function (d)
+                {
+                    return "translate(" + arc.centroid(d) + ")";
+                })
+                .attr("dy", "0.15em")
+                .text(function (d)
+                {
+                    return d.data.name;
+                });
         });
 
 }
